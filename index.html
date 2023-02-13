@@ -5,9 +5,9 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Document</title>
-    <link rel="stylesheet" href="/css/style.css">
-    <link rel="stylesheet" href="/css/normalize.css">
     <link rel="stylesheet" href="/css/skeleton.css">
+    <link rel="stylesheet" href="/css/normalize.css">
+    <link rel="stylesheet" href="/css/style.css">
     <script defer src="/src/index.js"></script>
 </head>
 <body>
@@ -22,12 +22,30 @@
     </header>
     <content>
         <div class="container">
-            <div class="row">
+            <div class="row" id="search-button">
                 <div class="two columns">
                     <form>
                         <input type="search" placeholder="Search for an Artist..." name="artistSearch">
                         <input type="submit" name="Search">
                     </form>
+                </div>
+            </div>
+            <div id="results-wrapper"> 
+                <div class="row" id="artist-info">
+                    <div class="four columns">
+                        <p id="artist-bio">Bio</p>
+                    </div>
+                    <div class="four columns">
+                        <img src="http://placehold.it/" id="artist-img">
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="two columns">
+                        <figure>
+                            <img src="http://placehold.it/">
+                            <figcaption>Album Title 1</figcaption>
+                        </figure>
+                    </div>
                 </div>
             </div>
         </div>
