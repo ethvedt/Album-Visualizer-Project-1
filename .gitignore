@@ -1,2 +1,4 @@
 # ignore directory named tokens
-tokens.js
+/src/tokens.js
+/albumArtwork/
+db.json
