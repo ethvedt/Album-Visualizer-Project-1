@@ -2,6 +2,8 @@ const form = document.querySelector("form");
 
 const url = "https://api.discogs.com";
 
+// const releasesUrl = `https://api.discogs.com/artists/{${artistId}}/releases`;
+
 form.addEventListener("submit", (event) => {
   event.preventDefault();
   const searchedArtist = event.target.artistSearch.value;
@@ -17,3 +19,4 @@ form.addEventListener("submit", (event) => {
       console.log(artistId);
     });
 });
+//
