@@ -49,3 +49,50 @@ form.addEventListener("submit", (event) => {
 //         }
 //     }
 // }
+
+// Layout 
+/* <div id="album-container">
+<div class="row" id="row1"> /////////////////max of 6 albums per row
+  <div class="two columns">
+    <figure>
+      <img src="http://placehold.it/">
+      <figcaption>Album Title 1</figcaption>
+    </figure>
+  </div>
+</div>
+</div> */
+const albumContainer = document.querySelector("#album-container");
+albumContainer.innerHTML = "";
+
+function populateAlbums(album) {
+  const rowOne = document.createElement("div");
+  rowOne.classList.add("row");
+  rowOne.id = "row1";
+  albumContainer.appendChild(rowOne);
+
+  const figure = document.createElement("figure");
+
+  const img = document.createElement("img");
+  img.src = album.image;
+
+  const figcaption = document.createElement("figcaption");
+  figcaption.textContent = album.title;
+  figure.appendChild(img);
+  figure.appendChild(figcaption);
+
+  const layoutDiv = document.createElement("div");
+  layoutDiv.class = "two columns";
+  layoutDiv.appendChild(figure);
+
+  let currentRow = albumContainer.querySelector("#row1");
+  if (currentRow.childElementCount < 6) {
+    currentRow.appendChild(layoutDiv);
+  }
+  else if (currentRow.childElementCount >= 6) {
+    const newRow = document.createElement("div");
+    newRow.classList.add("row");
+    newRow.id = `row${currentRow.id.value.split("row")[1] + 1}`;
+    albumContainer.appendChild(newRow);
+    currentRow = albumContainer.querySelector
+  }
+}
