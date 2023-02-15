@@ -1,4 +1,30 @@
 img {
-    max-width:120px;
-    height:auto;
+  box-shadow: 3px 3px 0.2em rgb(82, 82, 1), -0.3em 0 0.4em rgb(106, 106, 0);
+  border-radius: 2px;
+}
+
+h1 {
+  text-align: center;
+  font-family: "Franklin Gothic", "Arial Narrow", Arial, sans-serif;
+  font-size: 6rem;
+  color: rgb(89, 132, 24);
+}
+
+button {
+  margin-top: 10px;
+  outline: 2px solid rgb(115, 169, 34);
+  background-color: rgb(193, 238, 126);
+}
+
+input {
+  outline: 2px solid rgb(115, 169, 34);
+}
+
+figcaption {
+  font-weight: 600;
+  color: rgb(89, 132, 24);
+}
+
+#artist-bio {
+  font-weight: 500;
 }
