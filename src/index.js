@@ -12,6 +12,7 @@ function reloadAlbumContainer() {
   rowOne.id = "row1";
   albumContainer.appendChild(rowOne);
 }
+reloadAlbumContainer();
 
 form.addEventListener("submit", (event) => {
   event.preventDefault();
@@ -72,11 +73,36 @@ function populateAlbum(album) {
   const layoutDiv = document.createElement("div");
   layoutDiv.className = "two columns";
   layoutDiv.appendChild(figure);
+  figure.addEventListener("click", e => {
+    handleExpandDetails(e, album)
+  });
   return layoutDiv;
 }
-//figure.addEventListener("click", handleExpandDetails(album));
 
-function handleExpandDetails(album) {}
+function handleExpandDetails(event, album) {
+  const currentRow = event.target.parentNode.parentNode;
+  const albumDetailsRow = document.createElement("div");
+  albumDetailsRow.className = "row";
+  const detailsLayoutDiv = document.createElement("div");
+  detailsLayoutDiv.className = "offset-by-three eight columns";
+  albumDetailsRow.appendChild(detailsLayoutDiv);
+  const table = document.createElement("table");
+  const thead = document.createElement("thead");
+  table.appendChild(thead);
+  const albumID = album.id.value;
+  fetch(`${url}/releases/${albumID}`, {
+    headers: {
+      Authorization: TOKEN,
+    }
+  })
+    .then(res => res.json())
+    .then(album => {
+      for (const song in album.tracklist){
+
+      }
+    })
+
+}
 // {
 //     "id": 2328,
 //     "title": "The GrimmRobe Demos",

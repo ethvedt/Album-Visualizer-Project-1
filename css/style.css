@@ -23,6 +23,7 @@ input {
 figcaption {
   font-weight: 600;
   color: rgb(89, 132, 24);
+  font-size: 1.2rem;
 }
 
 #artist-bio {
