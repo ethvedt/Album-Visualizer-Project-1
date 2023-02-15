@@ -2,6 +2,8 @@ const form = document.querySelector("form");
 
 const albumContainer = document.querySelector("#album-container");
 
+const url = "https://api.discogs.com";
+
 function reloadAlbumContainer() {
   albumContainer.innerHTML = "";
   const rowOne = document.createElement("div");
@@ -10,8 +12,6 @@ function reloadAlbumContainer() {
   rowOne.id = "row1";
   albumContainer.appendChild(rowOne);
 }
-
-const url = "https://api.discogs.com";
 
 form.addEventListener("submit", (event) => {
   event.preventDefault();
