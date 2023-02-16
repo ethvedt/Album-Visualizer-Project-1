@@ -48,11 +48,12 @@ figcaption {
   padding: 25px;
   box-shadow: 3px 3px 0.2em rgb(82, 82, 1), -0.3em 0 0.4em rgb(106, 106, 0);
   position: fixed;
-  top: calc(50% - 200px);
+  top: calc(10%);
   left: calc(50% - 200px);
   width: 400px;
   min-height: 400px;
   text-align: center;
+  pointer-events: none;
 }
 #popupContainer div {
   margin: 0 auto;
@@ -65,4 +66,18 @@ figcaption {
 
 #popupContainer.hide {
   display: none;
+}
+
+.tracklist {
+  width: 100%;
+  list-style-position: outside;
+  line-height: 1rem;
+}
+
+.justify-left {
+  float:left;
+}
+
+.justify-right {
+float:right;
 }

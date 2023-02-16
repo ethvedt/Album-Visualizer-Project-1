@@ -27,7 +27,7 @@ form.addEventListener("submit", (event) => {
   reloadAlbumContainer();
 
   // console.log(event.target.artistSearch.value);
-  fetch(`${url}/database/search?q={${searchedArtist}}`, {
+  fetch(`${url}/database/search?q={${searchedArtist}}&type=artist`, {
     headers: {
       Authorization: TOKEN,
     },
@@ -35,16 +35,19 @@ form.addEventListener("submit", (event) => {
     .then((response) => response.json())
     .then((artistList) => {
       const artistId = artistList.results[0].id;
-      fetch(`${url}/artists/${artistId}/releases`, {
+      fetch(`${url}/database/search?type=release&artist={${artistList.results[0].title}}&country=US`, {
         headers: {
           Authorization: TOKEN,
         },
       })
         .then((response) => response.json())
         .then((albumList) => {
+/*           const cleanAlbumList = albumList.results.filter((el, index, self) => {
+            self.findIndex(album => album.master_id === el.master_id) === index;
+            }) */
           let currentRow = 1;
           let selectedRow = albumContainer.querySelector(`#row${currentRow}`);
-          albumList.releases.forEach((album) => {
+          albumList.results.forEach((album) => {
             //create elements to append to the DOM
             if (selectedRow.childElementCount < 6) {
               const currentAlbum = populateAlbum(album);
@@ -61,8 +64,8 @@ form.addEventListener("submit", (event) => {
             }
           });
         });
+      });
     });
-});
 //
 function populateAlbum(album) {
   //initialized figure and links image, info
@@ -70,20 +73,53 @@ function populateAlbum(album) {
   const img = document.createElement("img");
   img.src = album.thumb;
   const figcaption = document.createElement("figcaption");
-  figcaption.textContent = album.title;
+  figcaption.textContent = album.title.split(" - ")[1];
   figure.appendChild(img);
   figure.appendChild(figcaption);
   //Creates wrapper element for album
   const layoutDiv = document.createElement("div");
   layoutDiv.className = "two columns";
   layoutDiv.appendChild(figure);
+  //Populating album info in popup
+  const albumID = album.id;
+
   //adding event listener for hovering on the image element
 
   img.addEventListener("mouseenter", (event) => {
     popupContainer.classList.remove("hide");
     popupImage.src = album.thumb;
-    popupDetail.textContent = album.title;
+    popupDetail.textContent = album.title.split(" - ")[1];
     popupYear.textContent = album.year;
+    const trackList = document.createElement("ol");
+    fetch(`${url}/releases/${albumID}`, {
+      headers: {
+        Authorization: TOKEN,
+      }
+    })
+      .then(res => res.json())
+      .then(release => {
+        for (const song of release.tracklist) {
+          const songEntry = document.createElement('li');
+          songEntry.classList.add('tracklist');
+          const songName = document.createElement('span');
+          songName.classList.add('justify-left');
+          const runTime = document.createElement('span');
+          runTime.classList.add('justify-right');
+          runTime.innerText = song.duration;
+          songName.innerText = song.title;
+          songEntry.append(songName, runTime);
+          trackList.appendChild(songEntry);
+        }
+      })
+      .catch(error => {
+        console.log(error);
+        alert(error.message);
+      });
+    if (popupContainer.lastChild.nodeName = "OL") {
+      const list = popupContainer.lastChild;
+      popupContainer.removeChild(list);
+    }
+    popupContainer.appendChild(trackList);
   });
 
   img.addEventListener("mouseleave", (event) => {
@@ -95,7 +131,37 @@ function populateAlbum(album) {
 
 //figure.addEventListener("click", handleExpandDetails(album));
 
-function handleExpandDetails(album) {}
+/* function handleExpandDetails(event, album) {
+  const currentRow = event.target.parentNode.parentNode;
+  const albumDetailsRow = document.createElement("div");
+  albumDetailsRow.className = "row";
+  const detailsLayoutDiv = document.createElement("div");
+  detailsLayoutDiv.className = "offset-by-three eight columns";
+  albumDetailsRow.appendChild(detailsLayoutDiv);
+  const table = document.createElement("table");
+  const thead = document.createElement("thead");
+  table.appendChild(thead);
+  const tbody = document.createElement("tbody");
+  table.appendChild(tbody);
+
+  const albumID = album.id.value;
+  fetch(`${url}/releases/${albumID}`, {
+    headers: {
+      Authorization: TOKEN,
+    }
+  })
+    .then(res => res.json())
+    .then(album => {
+      const trackList = document.createElement("ol");
+      for (const song in album.tracklist){
+        let listElement = document.createElement('li');
+
+      }
+    })
+
+} */
+
+
 // {
 //     "id": 2328,
 //     "title": "The GrimmRobe Demos",
