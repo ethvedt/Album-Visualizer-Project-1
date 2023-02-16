@@ -37,3 +37,32 @@ figcaption {
 #artist-bio {
   font-weight: 500;
 }
+
+#popupContainer {
+  display: flex;
+  justify-content: center;
+  flex-direction: column;
+  align-content: center;
+  background-color: bisque;
+  border-radius: 5px;
+  padding: 25px;
+  box-shadow: 3px 3px 0.2em rgb(82, 82, 1), -0.3em 0 0.4em rgb(106, 106, 0);
+  position: fixed;
+  top: calc(50% - 200px);
+  left: calc(50% - 200px);
+  width: 400px;
+  min-height: 400px;
+  text-align: center;
+}
+#popupContainer div {
+  margin: 0 auto;
+  width: 75%;
+}
+
+#popupContainer img {
+  width: 100%;
+}
+
+#popupContainer.hide {
+  display: none;
+}
