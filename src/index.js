@@ -35,7 +35,7 @@ form.addEventListener("submit", (event) => {
     .then((response) => response.json())
     .then((artistList) => {
       const artistId = artistList.results[0].id;
-      fetch(`${url}/database/search?type=release&artist={${artistList.results[0].title}}&country=US`, {
+      fetch(`${url}/database/search?type=release&artist={${artistList.results[0].title}}&country=US&per_page=100`, {
         headers: {
           Authorization: TOKEN,
         },
@@ -44,10 +44,19 @@ form.addEventListener("submit", (event) => {
         .then((albumList) => {
 /*           const cleanAlbumList = albumList.results.filter((el, index, self) => {
             self.findIndex(album => album.master_id === el.master_id) === index;
-            }) */
+            }); */
+          const cleanAlbumList = (() => {
+            const newArray = [];
+            for (const album of albumList.results) {
+              if (newArray.some(el => el.master_id == album.master_id) == false) {
+                newArray.push(album);
+              };
+            };
+            return newArray.sort((a, b) => a.year - b.year);
+          })();
           let currentRow = 1;
           let selectedRow = albumContainer.querySelector(`#row${currentRow}`);
-          albumList.results.forEach((album) => {
+          cleanAlbumList.forEach((album) => {
             //create elements to append to the DOM
             if (selectedRow.childElementCount < 6) {
               const currentAlbum = populateAlbum(album);
