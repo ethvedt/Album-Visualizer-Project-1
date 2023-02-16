@@ -6,12 +6,11 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Artist Releases Visualized</title>
 
-    <link rel="stylesheet" href="/css/skeleton.css">
-    <link rel="stylesheet" href="/css/normalize.css">
-    <link rel="stylesheet" href="/css/style.css">
+    <link rel="stylesheet" href="/css/skeleton.css" />
+    <link rel="stylesheet" href="/css/normalize.css" />
+    <link rel="stylesheet" href="/css/style.css" />
     <script defer src="/src/index.js"></script>
     <script src="/src/tokens.js"></script>
-
   </head>
   <body>
     <header>
@@ -24,41 +23,34 @@
       </div>
     </header>
     <content>
-        <div class="container">
-            <div class="row" id="search-button">
-                <div class="two columns">
-                    <form>
-                        <input type="search" placeholder="Search for an Artist..." name="artistSearch">
-                        <button type="submit" name="Search">Search</button>
-                    </form>
-                </div>
+      <div class="container">
+        <div class="row" id="search-button">
+          <div class="two columns">
+            <form>
+              <input
+                type="search"
+                placeholder="Search for an Artist..."
+                name="artistSearch"
+              />
+              <button type="submit" name="Search">Search</button>
+            </form>
+          </div>
+        </div>
+        <div id="results-wrapper">
+          <div class="row" id="artist-info">
+            <p id="artist-bio"></p>
+          </div>
+          <div id="album-container">
+            <div class="row" id="row1">
+              <div class="two columns"></div>
             </div>
-            <div id="results-wrapper">
-                <div class="row" id="artist-info">
-                    <div class="four columns">
-                        <p id="artist-bio">Bio</p>
-                    </div>
-                    <div class="four columns">
-                        <!-- <img src="http://placehold.it/" id="artist-img"> -->
-                    </div>
-                </div>
-                <div id="album-container">
-                  <div class="row" id="row1">
-                    <div class="two columns">
-                      <!-- <figure>
-                        <img src="http://placehold.it/">
-                        <figcaption>Album Title 1</figcaption> -->
-                        <!-- </figure> -->
-                      </div>
-                    </div>
-                  </div>
-                </div>
-              </div>
-              <div id="popupContainer" class="hide">
-                <div><img id="albumDetail" src=""/></div>
-                <h3 id="popupDetail"></h3>
-                <h3 id="popupYear"></h3>
-              </div>
+          </div>
+        </div>
+      </div>
+      <div id="popupContainer" class="hide">
+        <div><img id="albumDetail" src="" /></div>
+        <h3 id="popupDetail"></h3>
+        <h3 id="popupYear"></h3>
       </div>
     </content>
   </body>

@@ -12,6 +12,8 @@ const popupYear = document.querySelector("#popupYear");
 
 const popupContainer = document.querySelector("#popupContainer");
 
+const artistBio = document.querySelector("#artist-bio");
+
 function reloadAlbumContainer() {
   albumContainer.innerHTML = "";
   const rowOne = document.createElement("div");
@@ -20,6 +22,43 @@ function reloadAlbumContainer() {
   rowOne.id = "row1";
   albumContainer.appendChild(rowOne);
 }
+
+const getAlbumList = (artistId) => {
+  fetch(`${url}/artists/${artistId}/releases`, {
+    headers: {
+      Authorization: TOKEN,
+    },
+  })
+    .then((response) => response.json())
+    .then((albumList) => {
+      let currentRow = 1;
+      let selectedRow = albumContainer.querySelector(`#row${currentRow}`);
+      albumList.releases.forEach((album) => {
+        //create elements to append to the DOM
+        if (selectedRow.childElementCount < 6) {
+          const currentAlbum = populateAlbum(album);
+          selectedRow.appendChild(currentAlbum);
+        } else if (selectedRow.childElementCount >= 6) {
+          currentRow++;
+          const newRow = document.createElement("div");
+          newRow.className = "row u-full-width";
+          newRow.id = `row${currentRow}`;
+          albumContainer.appendChild(newRow);
+          selectedRow = newRow;
+          const currentAlbum = populateAlbum(album);
+          selectedRow.appendChild(currentAlbum);
+        }
+      });
+    });
+};
+
+const getArtistBio = (artistId) => {
+  fetch(`${url}/artists/${artistId}`)
+    .then((response) => response.json())
+    .then((artistInfo) => {
+      artistBio.textContent = artistInfo.profile;
+    });
+};
 
 form.addEventListener("submit", (event) => {
   event.preventDefault();
@@ -35,32 +74,10 @@ form.addEventListener("submit", (event) => {
     .then((response) => response.json())
     .then((artistList) => {
       const artistId = artistList.results[0].id;
-      fetch(`${url}/artists/${artistId}/releases`, {
-        headers: {
-          Authorization: TOKEN,
-        },
-      })
-        .then((response) => response.json())
-        .then((albumList) => {
-          let currentRow = 1;
-          let selectedRow = albumContainer.querySelector(`#row${currentRow}`);
-          albumList.releases.forEach((album) => {
-            //create elements to append to the DOM
-            if (selectedRow.childElementCount < 6) {
-              const currentAlbum = populateAlbum(album);
-              selectedRow.appendChild(currentAlbum);
-            } else if (selectedRow.childElementCount >= 6) {
-              currentRow++;
-              const newRow = document.createElement("div");
-              newRow.className = "row u-full-width";
-              newRow.id = `row${currentRow}`;
-              albumContainer.appendChild(newRow);
-              selectedRow = newRow;
-              const currentAlbum = populateAlbum(album);
-              selectedRow.appendChild(currentAlbum);
-            }
-          });
-        });
+      getAlbumList(artistId);
+      getArtistBio(artistId);
+
+      //
     });
 });
 //
