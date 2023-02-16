@@ -4,6 +4,14 @@ const albumContainer = document.querySelector("#album-container");
 
 const url = "https://api.discogs.com";
 
+const popupImage = document.querySelector("#albumDetail");
+
+const popupDetail = document.querySelector("#popupDetail");
+
+const popupYear = document.querySelector("#popupYear");
+
+const popupContainer = document.querySelector("#popupContainer");
+
 function reloadAlbumContainer() {
   albumContainer.innerHTML = "";
   const rowOne = document.createElement("div");
@@ -41,18 +49,15 @@ form.addEventListener("submit", (event) => {
             if (selectedRow.childElementCount < 6) {
               const currentAlbum = populateAlbum(album);
               selectedRow.appendChild(currentAlbum);
-              console.log(selectedRow.childElementCount);
             } else if (selectedRow.childElementCount >= 6) {
               currentRow++;
               const newRow = document.createElement("div");
               newRow.className = "row u-full-width";
               newRow.id = `row${currentRow}`;
               albumContainer.appendChild(newRow);
-              console.log(selectedRow.childElementCount);
               selectedRow = newRow;
               const currentAlbum = populateAlbum(album);
               selectedRow.appendChild(currentAlbum);
-              console.log(selectedRow.childElementCount);
             }
           });
         });
@@ -72,8 +77,22 @@ function populateAlbum(album) {
   const layoutDiv = document.createElement("div");
   layoutDiv.className = "two columns";
   layoutDiv.appendChild(figure);
+  //adding event listener for hovering on the image element
+
+  img.addEventListener("mouseenter", (event) => {
+    popupContainer.classList.remove("hide");
+    popupImage.src = album.thumb;
+    popupDetail.textContent = album.title;
+    popupYear.textContent = album.year;
+  });
+
+  img.addEventListener("mouseleave", (event) => {
+    popupContainer.classList.add("hide");
+  });
+
   return layoutDiv;
 }
+
 //figure.addEventListener("click", handleExpandDetails(album));
 
 function handleExpandDetails(album) {}
