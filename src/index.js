@@ -56,9 +56,6 @@ form.addEventListener("submit", (event) => {
       )
         .then((response) => response.json())
         .then((albumList) => {
-          /*           const cleanAlbumList = albumList.results.filter((el, index, self) => {
-            self.findIndex(album => album.master_id === el.master_id) === index;
-            }); */
           const cleanAlbumList = (() => {
             const newArray = [];
             for (const album of albumList.results) {
