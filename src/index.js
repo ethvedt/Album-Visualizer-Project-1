@@ -12,6 +12,8 @@ const popupYear = document.querySelector("#popupYear");
 
 const popupContainer = document.querySelector("#popupContainer");
 
+const artistBio = document.querySelector("#artist-bio");
+
 function reloadAlbumContainer() {
   albumContainer.innerHTML = "";
   const rowOne = document.createElement("div");
@@ -20,6 +22,14 @@ function reloadAlbumContainer() {
   rowOne.id = "row1";
   albumContainer.appendChild(rowOne);
 }
+
+const getArtistBio = (artistId) => {
+  fetch(`${url}/artists/${artistId}`)
+    .then((response) => response.json())
+    .then((artistInfo) => {
+      artistBio.textContent = artistInfo.profile;
+    });
+};
 
 form.addEventListener("submit", (event) => {
   event.preventDefault();
@@ -35,23 +45,29 @@ form.addEventListener("submit", (event) => {
     .then((response) => response.json())
     .then((artistList) => {
       const artistId = artistList.results[0].id;
-      fetch(`${url}/database/search?type=release&artist={${artistList.results[0].title}}&country=US&per_page=100`, {
-        headers: {
-          Authorization: TOKEN,
+      getArtistBio(artistId);
+      fetch(
+        `${url}/database/search?type=release&artist={${artistList.results[0].title}}&country=US&per_page=100`,
+        {
+          headers: {
+            Authorization: TOKEN,
+          },
         },
-      })
+      )
         .then((response) => response.json())
         .then((albumList) => {
-/*           const cleanAlbumList = albumList.results.filter((el, index, self) => {
+          /*           const cleanAlbumList = albumList.results.filter((el, index, self) => {
             self.findIndex(album => album.master_id === el.master_id) === index;
             }); */
           const cleanAlbumList = (() => {
             const newArray = [];
             for (const album of albumList.results) {
-              if (newArray.some(el => el.master_id == album.master_id) == false) {
+              if (
+                newArray.some((el) => el.master_id == album.master_id) == false
+              ) {
                 newArray.push(album);
-              };
-            };
+              }
+            }
             return newArray.sort((a, b) => a.year - b.year);
           })();
           let currentRow = 1;
@@ -73,8 +89,8 @@ form.addEventListener("submit", (event) => {
             }
           });
         });
-      });
     });
+});
 //
 function populateAlbum(album) {
   //initialized figure and links image, info
@@ -103,28 +119,28 @@ function populateAlbum(album) {
     fetch(`${url}/releases/${albumID}`, {
       headers: {
         Authorization: TOKEN,
-      }
+      },
     })
-      .then(res => res.json())
-      .then(release => {
+      .then((res) => res.json())
+      .then((release) => {
         for (const song of release.tracklist) {
-          const songEntry = document.createElement('li');
-          songEntry.classList.add('tracklist');
-          const songName = document.createElement('span');
-          songName.classList.add('justify-left');
-          const runTime = document.createElement('span');
-          runTime.classList.add('justify-right');
+          const songEntry = document.createElement("li");
+          songEntry.classList.add("tracklist");
+          const songName = document.createElement("span");
+          songName.classList.add("justify-left");
+          const runTime = document.createElement("span");
+          runTime.classList.add("justify-right");
           runTime.innerText = song.duration;
           songName.innerText = song.title;
           songEntry.append(songName, runTime);
           trackList.appendChild(songEntry);
         }
       })
-      .catch(error => {
+      .catch((error) => {
         console.log(error);
         alert(error.message);
       });
-    if (popupContainer.lastChild.nodeName = "OL") {
+    if ((popupContainer.lastChild.nodeName = "OL")) {
       const list = popupContainer.lastChild;
       popupContainer.removeChild(list);
     }
@@ -169,7 +185,6 @@ function populateAlbum(album) {
     })
 
 } */
-
 
 // {
 //     "id": 2328,
