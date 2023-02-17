@@ -23,6 +23,7 @@ h1 {
   font-family: blueOcean, Arial, sans-serif;
   font-size: 6rem;
   color: rgb(247, 171, 31);
+  text-shadow: -1px -1px 0 rgb(244, 52, 26), 1px -1px 0 rgb(244, 52, 26), -1px 1px 0 rgb(244, 52, 26), 1px 1px 0 rgb(244, 52, 26);
 }
 
 button {
