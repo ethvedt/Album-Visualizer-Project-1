@@ -3,35 +3,40 @@
   src: url(/fonts/BLUE_OCEAN.ttf);
 }
 
+header {
+  background-color: rgb(172, 98, 8);
+}
+
 img {
-  box-shadow: 3px 3px 0.2em rgb(82, 82, 1), -0.3em 0 0.4em rgb(106, 106, 0);
+  box-shadow: 3px 3px 0.2em rgb(172, 98, 8), -0.3em 0 0.4em rgb(172, 98, 20);
   border-radius: 2px;
 }
 
 body {
-  background-color: rgb(231, 227, 227);
+  background-color: rgba(83, 82, 82, 0.383);
 }
 h1 {
   text-align: center;
   font-family: blueOcean, Arial, sans-serif;
   font-size: 6rem;
-  color: rgb(89, 132, 24);
+  color: rgb(207, 144, 26);
 }
 
 button {
   margin-top: 10px;
-  outline: 2px solid rgb(115, 169, 34);
-  background-color: rgb(193, 238, 126);
+  outline: 2px solid rgb(244, 92, 26);
+  background-color: rgb(207, 144, 26);
 }
 
 input {
-  outline: 2px solid rgb(115, 169, 34);
+  margin-top: 10px;
+  outline: 2px solid rgb(244, 92, 26);
 }
 
 figcaption {
   font-size: 1.2rem;
   font-weight: 600;
-  color: rgb(89, 132, 24);
+  color: rgb(118, 78, 4);
 }
 
 #artist-bio {
