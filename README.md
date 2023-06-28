@@ -10,7 +10,7 @@ This web app allows a user to search an artist name, and it will display some in
 
 ---
 
-This was my first major project for my software engineering boot camp. As a result, it is pretty primitive, having been written entirely in vanilla HTML and JavaScript. At the moment, this project would need to be cloned onto the user's local machine and the user would need to generate their own Discogs API key, [here](https://www.discogs.com/settings/developers). After that, add it to src/tokens.js in the following format: `const TOKEN = "Discogs token=***************";`. After that, just search for an artist and their releases should appear! 
+This was my first major project for my software engineering boot camp. As a result, it is pretty primitive, having been written entirely in vanilla HTML and JavaScript. At the moment, this project would need to be cloned onto the user's local machine and the user would need to generate their own Discogs API access token, [here](https://www.discogs.com/settings/developers). After that, add it to src/tokens.js in the following format: `const TOKEN = "Discogs token=***************";`. After that, just search for an artist and their releases should appear! 
 
 ![Search results for Kendrick Lamar](/screenshots/phase-1-project-kendrick.png)
 
